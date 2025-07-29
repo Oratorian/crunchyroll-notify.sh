@@ -1,8 +1,8 @@
 # Crunchyroll Notify
 
-**crunchyroll-notify.sh** is a modular Bash script that checks the Crunchyroll calendar RSS feed for new anime releases matching titles you define in a `config.json` file. When a match is found, it sends notifications via various services like Discord, Slack, Email, IFTTT, Pushover, or simply echoes to the terminal.
+**crunchyroll-notify.sh** is Bash script that checks the Crunchyroll calendar RSS feed for new anime releases matching titles you define in `config.json`. When a match is found, it sends notifications via various services like Discord, Slack, Email (WIP), IFTTT, Pushover, or simply echoes to the terminal.
 
-It is intended for self-hosted use on Linux systems and runs well from `cron`. Built for extensibility and maintainability, it is split into modular components under the `modules/` directory.
+It is intended for self-hosted use on Linux systems and runs well with a `systemd` timer. Built for extensibility and maintainability, it is split into modular components under the `modules/` directory.
 
 ---
 
@@ -13,7 +13,7 @@ It is intended for self-hosted use on Linux systems and runs well from `cron`. B
 * 🌐 Multi-service notifications: Discord, Email, Slack, IFTTT, Pushover
 * ⚙️ Simple configuration via `config.json`
 * 📜 Automatic log handling and rotation via `rsyslog` and `logrotate`
-* 💡 Smart cron installer and file validation
+* 💡 Smart systemd installer and file validation
 * 📦 Modular architecture
 * 💬 Supports dub language filtering
 
@@ -39,10 +39,10 @@ chmod +x crunchyroll-notify.sh
 nano cfg/config.json
 ```
 
-4. Set up cron (done automatically unless disabled):
+4. Run to initialize configurations and necessary system tools as well as systemd and syslogd
 
 ```bash
-crontab -e
+./crunchyroll-notify.sh --install
 ```
 
 5. To manually reinstall log routing:
@@ -61,11 +61,15 @@ crontab -e
 
 ## Usage
 
+This is only for manual consecutive runs and should be avoided, unless you run debugging
+- For debugging please stop the systemd timer first `systemctl stop crunchyroll-notify.timer`
+- When debugging is finished restart it with `systemctl start crunchyroll-notify.timer`
+
 ```bash
 ./crunchyroll-notify.sh
 ```
 
-You’ll see color-coded output and log entries appear in `/var/log/crunchyroll-notify.log` if `rsyslog` is configured correctly.
+You’ll see color-coded output as `stdout` and log entries appear in `/var/log/crunchyroll-notify.log` if `rsyslog` is configured correctly.
 
 ---
 
