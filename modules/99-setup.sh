@@ -1,6 +1,6 @@
 install_environment() {
     local timestamp="$(date "+%Y-%m-%d %H:%M:%S")"
-    if [ -f "$SCRIPT_DIR/.installed" ]; then
+        if [ -f "$SCRIPT_DIR/.installed" ]; then
         echo -ne "\e[33m[INFO] Crunchyroll Notify appears to be already installed. Reinstall anyway? (y/N): \e[0m"
         read -r confirm
         if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
@@ -9,23 +9,22 @@ install_environment() {
         fi
     fi
 
-    check_system_requirements
-    #echo -e "\e[33m[$timestamp] [INFO] Checked system requirements.\e[0m" >&2
-    [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Checked system requirements."
+  check_system_requirements
+  [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Checked system requirements."
 
+  # Optional logging and rotation
+  if command -v systemctl &>/dev/null && [ -d /etc/systemd/system ]; then
     install_rsyslog_config
-    #echo -e "\e[33m[$timestamp] [INFO] Installed rsyslog.d configuration for logging.\e[0m" >&2
-    [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Installed rsyslog.d configuration for logging."
-
     install_logrotate_for_crunchyroll_notify
-    #echo -e "\e[33m[$timestamp] [INFO] Installed logrotate.d configuration.\e[0m" >&2
-    [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Checked logrotate.d configuration."
-
     install_systemd_timer
-    [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Installed systemd timer."
+    log "INFO" "Systemd, rsyslog, and logrotate integration installed."
+  else
+    log "INFO" "Systemd or rsyslog not detected. Skipping integration."
+  fi
 
-    touch "$SCRIPT_DIR/.installed"
-    echo -e "\e[33m[$timestamp] [INFO] Crunchyroll Notify installation complete.\e[0m" >&2
+  # Mark install complete
+  truncate -s 0 "$SCRIPT_DIR/.installed"
+  echo -e "\e[33m[$timestamp] [INFO] Crunchyroll Notify installation complete.\e[0m" >&2
 }
 
 uninstall_environment() {
@@ -84,13 +83,10 @@ uninstall_environment() {
 }
 
 [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Config file exists. Checking for 'TRAP'"
-
 if [ -f "$SCRIPT_DIR/.installed" ]; then
   if jq -e 'has("user_trap")' "$SCRIPT_DIR/cfg/config.json" >/dev/null 2>&1; then
       log "ERROR" "Please edit and review '$SCRIPT_DIR/cfg/config.json' and remove the 'user_trap' line before proceeding."
       exit 1
   fi
-    install_systemd_timer
-    [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Installed systemd timer."
 fi
 setup_loaded=true

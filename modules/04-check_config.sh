@@ -48,14 +48,15 @@ check_config() {
     [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Default config created."
   fi
 
-# Merge default config with user config, applying animes fallback and dropping user_trap
 updated_config=$(jq -n \
   --argjson default "$default_config" \
-  --argfile user "$config_path" \
-  '$default as $d | $user as $u |
-   $d * $u
-   | del(.user_trap)
-   | .animes = if ($u.animes // {} | length) > 0 then $u.animes else $d.animes end'
+  --slurpfile user "$config_path" '
+    $default as $d
+    | ($user[0] // {}) as $u
+    | $d * $u
+    | del(.user_trap)
+    | .animes = if ($u.animes // {} | length) > 0 then $u.animes else $d.animes end
+  '
 )
 
 # Canonicalize both sides

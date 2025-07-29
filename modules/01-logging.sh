@@ -5,28 +5,27 @@ log() {
     shift
     local message="$*"
     local timestamp="$(date "+%Y-%m-%d %H:%M:%S")"
-
-    # Define tag and facility
     local tag="crunchyroll-notify"
     local facility="user"
 
+    local color_reset="\e[0m"
+    local color_red="\e[31m"
+    local color_yellow="\e[33m"
+    local color_blue="\e[34m"
+    local color_grey="\e[90m"
+
+    # Safe logger fallback
+    if command -v logger &>/dev/null && logger -T test >/dev/null 2>&1; then
+        logger -p ${facility}.${loglevel,,} -t "$tag" "[$timestamp] [$loglevel] $message" || true
+    fi
+
+    # Always print to console with color
     case "$loglevel" in
-        "ERROR")
-            logger -p ${facility}.err -t "$tag" "[$timestamp] [ERROR] $message"
-            echo -e "\e[31m[$timestamp] [ERROR] $message\e[0m" >&2
-            ;;
-        "INFO")
-            logger -p ${facility}.info -t "$tag" "[$timestamp] [INFO] $message"
-            echo -e "\e[33m[$timestamp] [INFO] $message\e[0m" >&2
-            ;;
-        "DEBUG")
-            logger -p ${facility}.debug -t "$tag" "[$timestamp] [DEBUG] $message"
-            echo -e "\e[34m[$timestamp] [DEBUG] $message\e[0m" >&2
-            ;;
-        *)
-            logger -p ${facility}.notice -t "$tag" "[$timestamp] [UNKNOWN] $message"
-            echo "[$timestamp] [UNKNOWN] $message" >&2
-            ;;
+        "ERROR") echo -e "${color_red}[$timestamp] [ERROR] $message${color_reset}" >&2 ;;
+        "INFO")  echo -e "${color_yellow}[$timestamp] [INFO]  $message${color_reset}" >&2 ;;
+        "DEBUG") echo -e "${color_blue}[$timestamp] [DEBUG] $message${color_reset}" >&2 ;;
+        *)       echo -e "${color_grey}[$timestamp] [UNKNOWN] $message${color_reset}" >&2 ;;
     esac
 }
+
 logging_loaded=true
