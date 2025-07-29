@@ -1,6 +1,12 @@
 
 # Changelog
 
+### 3.0.1 - 29.July.2025
+
+### Fixed
+- Corrected config variables and related functions for the `announced_file`
+---
+
 ### 3.0.0 - 28.July.2025
 
 ### Added

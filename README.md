@@ -122,12 +122,12 @@ After all modules are sourced, a validation check ensures all required modules w
 
 ### Fixed
 - Corrected config variables and related functions for the `announced_file`
+---
 
 ### 3.0.0 - 28.July.2025
 
 ### Fixed
 - Full episode titles are now persisted (not just series names), so each EP (e.g. “SomeAnime – EP5”) is stored and recognized individually
----
 
 ### Added
 
