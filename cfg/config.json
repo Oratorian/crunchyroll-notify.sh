@@ -1,0 +1,35 @@
+{
+    "cron_time": "15",
+    "animes": {
+      "Example Anime": "ExampleDub"
+    },
+    "notification_services": {
+      "email": false,
+      "pushover": false,
+      "ifttt": false,
+      "slack": false,
+      "discord": false,
+      "echo": true
+    },
+    "announcerange": 60,
+    "announced_file": "/tmp/announced_series_titles",
+    "email_recipient": "your_email@example.com",
+    "pushover": {
+      "user_key": "your_pushover_user_key",
+      "app_token": "your_pushover_app_token"
+    },
+    "ifttt": {
+      "event": "your_ifttt_event",
+      "key": "your_ifttt_key"
+    },
+    "slack": {
+      "webhook_url": "https://hooks.slack.com/services/your/slack/webhook/url"
+    },
+    "discord": {
+      "webhook_url": "https://discord.com/your/discord/channel/webhook/"
+    },
+    "debug": {
+      "enabled": false
+    },
+    "user_trap": "⚠️ IMPORTANT: After you’ve updated your settings, please delete this entire line from config.json. Crunchyroll_notify.sh will not run until you do."
+  }
