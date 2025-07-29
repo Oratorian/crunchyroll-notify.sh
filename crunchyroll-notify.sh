@@ -6,7 +6,7 @@
 # as the original Author
 #---------------------------------------------------------------------------------------------
 
-## Version: 3.0.0
+## Version: 3.0.1
 
 declare -A user_shows
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

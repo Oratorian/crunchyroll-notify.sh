@@ -20,7 +20,7 @@ add_title_to_announced() {
 
 check_announced_file() {
     # Optional: clean up old announced_* files older than 2 days
-    find /tmp -maxdepth 1 -type f -name "announced_*" -mtime +2 -exec rm -f {} \;
+    find $announced_file_dir -maxdepth 1 -type f -name "announced_*" -mtime +2 -exec rm -f {} \;
 
     if [ ! -f "$announced_file" ]; then
         truncate -s 0 $announced_file

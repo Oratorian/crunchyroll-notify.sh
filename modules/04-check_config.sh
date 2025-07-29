@@ -16,7 +16,7 @@ check_config() {
       "echo": true
     },
     "announcerange": 60,
-    "announced_file": "/tmp/announced_series_titles",
+    "announced_file_dir": "/tmp",
     "email_recipient": "your_email@example.com",
     "pushover": {
       "user_key": "your_pushover_user_key",
