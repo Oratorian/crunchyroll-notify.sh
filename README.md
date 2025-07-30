@@ -2,8 +2,19 @@
 
 **crunchyroll-notify.sh** is momentary not working.
 
-Due to Crunchyroll killing the Video release feed that was hosted on https://www.crunchyroll.com/rss/calendar
-This script stopped working as of today **29.07.2025**
+# 30.07.2025 - New Method discovered.
 
-The new feed is mostly news and no video release feed, that may change in the future.
-I may find a workaround but this could take a while, feel free to fork and try.
+## [Unreleased]
+
+### Added
+- Introduced a reliable new method for fetching and parsing Crunchyroll's simulcast release calendar.
+  - Uses FlareSolverr or Bypassr to bypass Cloudflare bot protection.
+  - Leverages `csplit` to split fetched HTML into per-episode blocks.
+  - Parses cleanly with `htmlq` using CSS selectors and XPath to extract show titles, release times, thumbnails, and metadata.
+
+### Changed
+- Project is now Docker-only to streamline setup with required headless-solvers (FlareSolverr/Bypassr).
+
+### Notes
+- Legacy RSS support is considered deprecated due to Crunchyroll discontinuation.
+- Internal rework in progress to integrate new scraping pipeline with existing notification system.
