@@ -1,6 +1,12 @@
 # Crunchyroll Notify
 
-**crunchyroll-notify.sh** is momentary not working.
+# 09.08.2025 - Crunchyroll gave in
+
+## 3.0.1
+
+### Notice
+- Crunchyroll actually listened and reactivated their rss release feeds, so this Project should work asIS
+- Nontheless I will release a Docker version shortly.
 
 # 30.07.2025 - New Method discovered.
 
