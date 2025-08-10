@@ -1,6 +1,14 @@
-
 # Changelog
 
+# Crunchyroll gave in
+
+## 3.0.1 - 09.August.2025
+
+### Notice
+- Crunchyroll actually listened and reactivated their rss release feeds, so this Project should work asIS
+- Nontheless I will release a Docker version shortly.
+
+---
 ## [Unreleased]
 
 ### Added
@@ -17,7 +25,7 @@
 - Internal rework in progress to integrate new scraping pipeline with existing notification system.
 ---
 
-### 0.0.0 - 29.07.2025
+### 0.0.0 - 29.July.2025
 
 # Closed
 
