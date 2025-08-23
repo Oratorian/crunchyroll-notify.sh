@@ -8,13 +8,11 @@ on:
       - 'v*'
     paths:
       - 'docker-version/**'
-      - '.github/workflows/docker-publish.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'docker-version/**'
-      - '.github/workflows/docker-publish.yml'
   workflow_dispatch:
 
 env:
