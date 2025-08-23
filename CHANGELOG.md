@@ -1,42 +1,34 @@
+
 # Changelog
 
-# Crunchyroll gave in
-
-## 3.0.1 - 09.August.2025
-
-### Notice
-- Crunchyroll actually listened and reactivated their rss release feeds, so this Project should work asIS
-- Nontheless I will release a Docker version shortly.
-
----
-## [Unreleased]
+### 3.0.2 - 23.August.2025
 
 ### Added
-- Introduced a reliable new method for fetching and parsing Crunchyroll's simulcast release calendar.
-  - Uses FlareSolverr or Bypassr to bypass Cloudflare bot protection.
-  - Leverages `csplit` to split fetched HTML into per-episode blocks.
-  - Parses cleanly with `htmlq` using CSS selectors and XPath to extract show titles, release times, thumbnails, and metadata.
+- Comprehensive Docker environment variable support with extensive documentation
+- PUID/PGID user mapping for proper Docker volume permissions
+- Timezone support via TZ environment variable with tzdata package
+- GitHub Actions workflow for automated multi-platform Docker builds
+- OCI labels for better container package display and metadata
+- Custom Docker runner replacing system cron to avoid permission issues
+- Support for both numeric (minutes) and full cron format in CRON_TIME
+- Docker-compatible logging with proper stream separation and color handling
+- Build attestations and container signing for enhanced security
+- Multi-platform container builds (linux/amd64, linux/arm64)
 
 ### Changed
-- Project is now Docker-only to streamline setup with required headless-solvers (FlareSolverr/Bypassr).
+- Enhanced docker-entrypoint.sh with complete PUID/PGID implementation
+- Fixed all path handling to support directories with spaces throughout codebase
+- Removed unnecessary Docker packages (cron, rsyslog, logrotate) for cleaner builds
+- Improved Dockerfile with security best practices and proper user handling
+- Enhanced module loading validation and error handling
 
-### Notes
-- Legacy RSS support is considered deprecated due to Crunchyroll discontinuation.
-- Internal rework in progress to integrate new scraping pipeline with existing notification system.
+### Fixed
+- Path quoting issues causing jq parsing errors with spaces in directory names
+- Docker permission errors with /var/run/crond.pid by implementing custom runner
+- GitHub Actions workflow permissions and attestation configuration
+- Container timezone handling and proper /etc/localtime symlink management
+
 ---
-
-### 0.0.0 - 29.July.2025
-
-# Closed
-
-**crunchyroll-notify.sh** is momentary not working.
-
-Due to Crunchyroll killing the Video release feed that was hosted on https://www.crunchyroll.com/rss/calendar
-This script stopped working as of today **29.07.2025**
-The change happen somewhat between today .. Because every was working finde until 04:30[CEST]
-
-The new feed is mostly news and no video release feed, that may change in the future.
-I may find a workaround but this could take a while, feel free to fork and try.
 
 ### 3.0.1 - 29.July.2025
 

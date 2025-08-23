@@ -406,10 +406,8 @@ rm cfg/config.json && ./crunchyroll-notify.sh
 ## 🔗 Links & Resources
 
 - **📋 [Changelog](CHANGELOG.md)** - Version history and detailed changes
-- **🐳 [GitHub Packages](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/pkgs/container/YOUR_REPO_NAME)** - Pre-built Docker images
-- **⚡ [GitHub Actions](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/actions)** - Automated builds and tests
-- **🐛 [Issues](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/issues)** - Bug reports and feature requests
-- **💬 [Discussions](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/discussions)** - Community support and ideas
+- **🐳 [GitHub Packages](https://github.com/Oratorian/crunchyroll-notify.sh/pkgs/container/crunchyroll-notify.sh)** - Pre-built Docker images
+- **🐛 [Issues](https://github.com/Oratorian/crunchyroll-notify.sh/issues)** - Bug reports and feature requests
 
 ---
 
