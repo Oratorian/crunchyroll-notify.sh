@@ -1,0 +1,34 @@
+{
+  "animes": {
+    "Anne Shirley": ""
+  },
+  "announced_file_dir": "/tmp",
+  "announcerange": 999,
+  "cron_time": "15",
+  "debug": {
+    "enabled": true
+  },
+  "discord": {
+    "webhook_url": "https://discord.com/your/discord/channel/webhook/"
+  },
+  "email_recipient": "your_email@example.com",
+  "ifttt": {
+    "event": "your_ifttt_event",
+    "key": "your_ifttt_key"
+  },
+  "notification_services": {
+    "discord": false,
+    "echo": true,
+    "email": false,
+    "ifttt": false,
+    "pushover": false,
+    "slack": false
+  },
+  "pushover": {
+    "app_token": "your_pushover_app_token",
+    "user_key": "your_pushover_user_key"
+  },
+  "slack": {
+    "webhook_url": "https://hooks.slack.com/services/your/slack/webhook/url"
+  }
+}
