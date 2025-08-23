@@ -3,15 +3,15 @@
 install_package() {
     local package="$1"
     if [ -x "$(command -v apt)" ]; then
-        sudo apt update && sudo apt install -y "$package"
+         apt update &&  apt install -y "$package"
     elif [ -x "$(command -v yum)" ]; then
-        sudo yum install -y "$package"
+         yum install -y "$package"
     elif [ -x "$(command -v dnf)" ]; then
-        sudo dnf install -y "$package"
+         dnf install -y "$package"
     elif [ -x "$(command -v pacman)" ]; then
-        sudo pacman -Sy --noconfirm "$package"
+         pacman -Sy --noconfirm "$package"
     elif [ -x "$(command -v zypper)" ]; then
-        sudo zypper install -y "$package"
+         zypper install -y "$package"
     elif [ -x "$(command -v brew)" ]; then
         brew install "$package"
     else
@@ -57,16 +57,16 @@ install_rsyslog_config() {
 
     log "INFO" "Installing rsyslog configuration for crunchyroll-notify"
 
-    sudo tee "$config_path" >/dev/null <<EOF
+     tee "$config_path" >/dev/null <<EOF
 if \$programname == 'crunchyroll-notify' then /var/log/crunchyroll-notify.log
 & stop
 EOF
 
-    sudo touch /var/log/crunchyroll-notify.log
-    sudo chmod 640 /var/log/crunchyroll-notify.log
-    sudo chown syslog:adm /var/log/crunchyroll-notify.log
+     touch /var/log/crunchyroll-notify.log
+     chmod 640 /var/log/crunchyroll-notify.log
+     chown syslog:adm /var/log/crunchyroll-notify.log
 
-    sudo systemctl restart rsyslog
+     systemctl restart rsyslog
     log "INFO" "rsyslog config installed and service restarted"
 }
 
@@ -81,16 +81,16 @@ reinstall_rsyslog_config() {
     fi
 
     echo -e "\e[33m[$timestamp] [INFO] Installing rsyslog configuration for crunchyroll-notify.\e[0m" >&2
-    sudo tee "$config_path" >/dev/null <<EOF
+     tee "$config_path" >/dev/null <<EOF
 if \$programname == 'crunchyroll-notify' then /var/log/crunchyroll-notify.log
 & stop
 EOF
 
-    sudo touch /var/log/crunchyroll-notify.log
-    sudo chmod 640 /var/log/crunchyroll-notify.log
-    sudo chown syslog:adm /var/log/crunchyroll-notify.log
+     touch /var/log/crunchyroll-notify.log
+     chmod 640 /var/log/crunchyroll-notify.log
+     chown syslog:adm /var/log/crunchyroll-notify.log
 
-    sudo systemctl restart rsyslog
+     systemctl restart rsyslog
     echo -e "\e[33m[$timestamp] [INFO] rsyslog config installed and service restarted.\e[0m" >&2
 }
 
@@ -113,7 +113,7 @@ install_logrotate_for_crunchyroll_notify() {
 
     log "INFO" "Installing logrotate configuration for Crunchyroll log at $logrotate_config_path"
 
-    sudo tee "$logrotate_config_path" >/dev/null <<EOL
+     tee "$logrotate_config_path" >/dev/null <<EOL
 ${target_logfile} {
     daily
     rotate 7
@@ -155,18 +155,18 @@ install_systemd_timer() {
     fi
 
     # Write .service file
-    sudo tee "$service_path" >/dev/null <<EOF
+     tee "$service_path" >/dev/null <<EOF
 [Unit]
 Description=Run Crunchyroll Notify
 
 [Service]
 Type=oneshot
-ExecStart=$exec_path
-WorkingDirectory=$SCRIPT_DIR
+ExecStart="$exec_path"
+WorkingDirectory="$SCRIPT_DIR"
 EOF
 
     # Write .timer file
-    sudo tee "$timer_path" >/dev/null <<EOF
+     tee "$timer_path" >/dev/null <<EOF
 [Unit]
 Description=Run Crunchyroll Notify every $interval minutes
 
@@ -179,9 +179,9 @@ WantedBy=timers.target
 EOF
 
     # Reload and restart systemd timer
-    sudo systemctl daemon-reexec
-    sudo systemctl daemon-reload
-    sudo systemctl enable --now crunchyroll-notify.timer
+     systemctl daemon-reexec
+     systemctl daemon-reload
+     systemctl enable --now crunchyroll-notify.timer
 
     log "INFO" "Systemd timer installed and enabled (every $interval minutes)"
     [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Wrote systemd service and timer files"

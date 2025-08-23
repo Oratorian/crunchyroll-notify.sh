@@ -20,10 +20,10 @@ add_title_to_announced() {
 
 check_announced_file() {
     # Optional: clean up old announced_* files older than 2 days
-    find $announced_file_dir -maxdepth 1 -type f -name "announced_*" -mtime +2 -exec rm -f {} \;
+    find "$announced_file_dir" -maxdepth 1 -type f -name "announced_*" -mtime +2 -exec rm -f {} \;
 
     if [ ! -f "$announced_file" ]; then
-        truncate -s 0 $announced_file
+        truncate -s 0 "$announced_file"
         sed -i '/^\s*$/d' "$announced_file"
         [ "$DEBUG_ENABLED" = true ] && log "DEBUG" "Created announced file at $announced_file."
         log "INFO" "Created announced file at $announced_file."
@@ -112,7 +112,7 @@ check_rsyslog_config_and_logfile() {
 
     if [ ! -s "$logfile" ]; then
         log "INFO" "Log file missing. Attempting to reload rsyslog to recreate it..."
-        sudo systemctl kill -s HUP rsyslog 2>/dev/null || sudo systemctl restart rsyslog
+         systemctl kill -s HUP rsyslog 2>/dev/null ||  systemctl restart rsyslog
         sleep 1.1
 
         if [ -s "$logfile" ]; then

@@ -1,12 +1,11 @@
 #!/bin/bash
-
 #---------------------------------------------------------------------------------------------
 # This script © 2024 by Oration 'Mahesvara' is released unter the GPL-3.0 license
 # Reproduction and modifications are allowed as long as I Oratorian@github.com is credited
 # as the original Author
 #---------------------------------------------------------------------------------------------
 
-## Version: 3.0.1
+## Version: 3.0.2
 
 declare -A user_shows
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
