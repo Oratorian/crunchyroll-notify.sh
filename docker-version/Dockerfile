@@ -1,5 +1,13 @@
 FROM debian:bookworm-slim
 
+# OCI Labels for better package display
+LABEL org.opencontainers.image.title="Crunchyroll Notify"
+LABEL org.opencontainers.image.description="Monitor Crunchyroll RSS feed for new anime episodes and send notifications via Discord, Slack, Pushover, IFTTT, or email"
+LABEL org.opencontainers.image.vendor="Crunchyroll Notify Project"
+LABEL org.opencontainers.image.licenses="GPL-3.0"
+LABEL org.opencontainers.image.source="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME"
+LABEL org.opencontainers.image.documentation="https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/blob/main/DOCKER.md"
+
 ENV container=docker
 WORKDIR /app
 

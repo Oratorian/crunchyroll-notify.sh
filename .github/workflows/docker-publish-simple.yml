@@ -1,4 +1,4 @@
-name: Build and Publish Docker Image
+name: Build and Publish Docker Image (Simple)
 
 on:
   push:
@@ -9,14 +9,14 @@ on:
       - 'v*'
     paths:
       - 'docker-version/**'
-      - '.github/workflows/docker-publish.yml'
+      - '.github/workflows/docker-publish-simple.yml'
   pull_request:
     branches:
       - main
       - master
     paths:
       - 'docker-version/**'
-      - '.github/workflows/docker-publish.yml'
+      - '.github/workflows/docker-publish-simple.yml'
   workflow_dispatch:
 
 env:
@@ -29,8 +29,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
-      attestations: write
 
     steps:
       - name: Checkout repository
@@ -59,15 +57,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=raw,value=latest,enable={{is_default_branch}}
-          labels: |
-            org.opencontainers.image.title=Crunchyroll Notify
-            org.opencontainers.image.description=Monitor Crunchyroll RSS feed for new anime episodes and send notifications via Discord, Slack, Pushover, IFTTT, or email
-            org.opencontainers.image.vendor=Crunchyroll Notify Project
-            org.opencontainers.image.licenses=GPL-3.0
-            org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/main/DOCKER.md
 
       - name: Build and push Docker image
-        id: build
         uses: docker/build-push-action@v5
         with:
           context: ./docker-version
@@ -78,10 +69,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Generate artifact attestation
-        if: github.event_name != 'pull_request' && github.repository_owner != ''
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          subject-digest: ${{ steps.build.outputs.digest }}
-          push-to-registry: true
+      - name: Image digest
+        if: github.event_name != 'pull_request'
+        run: echo "Image pushed with digest ${{ steps.build.outputs.digest }}"
