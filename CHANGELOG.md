@@ -4,10 +4,9 @@
 ### 3.0.2 - 23.August.2025
 
 ### Added
-- Comprehensive Docker environment variable support with extensive documentation
+- Docker Version with environment variable support.
 - PUID/PGID user mapping for proper Docker volume permissions
 - Timezone support via TZ environment variable with tzdata package
-- GitHub Actions workflow for automated multi-platform Docker builds
 - OCI labels for better container package display and metadata
 - Custom Docker runner replacing system cron to avoid permission issues
 - Support for both numeric (minutes) and full cron format in CRON_TIME
