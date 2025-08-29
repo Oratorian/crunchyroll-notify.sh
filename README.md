@@ -3,7 +3,7 @@
 [![Docker Build](https://github.com/Oratorian/crunchyroll_notify.sh/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Oratorian/crunchyroll-notify.sh/actions/workflows/docker-publish.yml)
 
 # Please be aware that the Docker version and the standalone version <ins>_can not_</ins> be mixed
----
+
 **crunchyroll-notify.sh** is a Bash script that monitors the Crunchyroll calendar RSS feed for new anime releases matching titles you define in `config.json`. When a match is found, it sends notifications via various services like Discord, Slack, Email, IFTTT, Pushover, or simply echoes to the terminal.
 
 It is intended for self-hosted use on Linux systems and runs well with a `systemd` timer or Docker. Built for extensibility and maintainability, it is split into modular components under the `modules/` directory.
